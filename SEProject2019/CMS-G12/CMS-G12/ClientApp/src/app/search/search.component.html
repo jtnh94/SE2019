@@ -1,0 +1,26 @@
+<form>
+  <div class="form-group">
+    <label for="startingSearch"></label>
+    <input name="startingSearch" type="text" [(ngModel)]="startingSearch" class="form-control col-sm-9" id="startingSearch" placeholder="Start Point">
+  </div>
+
+  <select class="col-sm-3" id="startingDropdown" name="startingDropdown">
+    <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
+  </select>
+
+  <div class="form-group">
+    <label for="destinationSearch"></label>
+    <input name="destinationSearch" type="text" [(ngModel)]="destinationSearch" class="form-control col-sm-9" id="destinationSearch" placeholder="Destination">
+  </div>
+
+  <select class="col-sm-3" id="destinationDropdown" name="destinationDropdown">
+    <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
+  </select> <br />
+
+  <button (click)='createRoute()' type="submit" class="btn btn-dark">Route</button>
+</form>
+
+<agm-map [(latitude)]="latCenter" [(longitude)]="lngCenter" [(zoom)]="zoom" [disableDefaultUI]="true" [zoomControl]="true">
+  <agm-marker *ngFor="let data of buildings; let i = index" [(latitude)]="data.lat" [(longitude)]="data.lng" [agmFitBounds]="true"></agm-marker>
+</agm-map>
+
