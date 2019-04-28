@@ -1,26 +1,40 @@
-<form>
-  <div class="form-group">
-    <label for="startingSearch"></label>
-    <input name="startingSearch" type="text" [(ngModel)]="startingSearch" class="form-control col-sm-9" id="startingSearch" placeholder="Start Point">
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <form>
+        <div class="form-group">
+          <label for="startingSearch"></label>
+          <input name="startingSearch" type="text" [(ngModel)]="startingSearch" class="form-control col-sm-9" id="startingSearch" placeholder="Start Point">
+        </div>
+        <div class="form-group">
+          <label for="destinationSearch"></label>
+          <input name="destinationSearch" type="text" [(ngModel)]="destinationSearch" class="form-control col-sm-9" id="destinationSearch" placeholder="Destination">
+        </div>
+        <button (click)="createRouteFromSearch(startingSearch, destinationSearch)" type="submit" class="btn btn-dark">Route</button>
+      </form>
+    </div>
+    <div class="col-sm">
+
+    </div>
+    <div class="col-sm">
+      <form>
+        <select class="col-sm-6" id="startingDropdown" name="startingDropdown">
+          <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
+        </select>
+        <br />
+        <select class="col-sm-6" id="destinationDropdown" name="destinationDropdown">
+          <option *ngFor="let item2 of buildings" [ngValue]="item">{{item2.name}}</option>
+        </select> <br />
+        <button (click)="createRouteFromDropdown(startingDropdown, destinationDropdown)" type="submit" class="btn btn-dark">Route</button>
+      </form>
+    </div>
   </div>
+</div>
 
-  <select class="col-sm-3" id="startingDropdown" name="startingDropdown">
-    <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
-  </select>
-
-  <div class="form-group">
-    <label for="destinationSearch"></label>
-    <input name="destinationSearch" type="text" [(ngModel)]="destinationSearch" class="form-control col-sm-9" id="destinationSearch" placeholder="Destination">
-  </div>
-
-  <select class="col-sm-3" id="destinationDropdown" name="destinationDropdown">
-    <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
-  </select> <br />
-
-  <button (click)='createRoute()' type="submit" class="btn btn-dark">Route</button>
-</form>
-
-<agm-map [(latitude)]="latCenter" [(longitude)]="lngCenter" [(zoom)]="zoom" [disableDefaultUI]="true" [zoomControl]="true">
-  <agm-marker *ngFor="let data of buildings; let i = index" [(latitude)]="data.lat" [(longitude)]="data.lng" [agmFitBounds]="true"></agm-marker>
-</agm-map>
+<div>
+  <agm-map [(latitude)]="latCenter" [(longitude)]="lngCenter" [(zoom)]="zoom" [disableDefaultUI]="true" [zoomControl]="true" id="map">
+    <agm-marker *ngFor="let data of buildings; let i = index" [(latitude)]="data.lat" [(longitude)]="data.lng" [agmFitBounds]="true"></agm-marker>
+    <agm-direction [origin]="point1" [destination]="point2" [travelMode]="travelMode"></agm-direction>
+  </agm-map>
+</div>
 

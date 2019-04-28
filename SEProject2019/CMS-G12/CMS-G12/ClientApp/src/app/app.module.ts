@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { SearchComponent } from './search/search.component';
 
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmDirectionModule } from 'agm-direction';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
     RouterModule.forRoot([
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
-    ])
+    ]),
+    AgmDirectionModule,
   ],
   providers: [GoogleMapsAPIWrapper],
   bootstrap: [AppComponent]
