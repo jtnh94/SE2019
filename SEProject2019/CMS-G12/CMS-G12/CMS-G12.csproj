@@ -27,10 +27,12 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\Coordinate.ts" />
+    <None Remove="ClientApp\src\index.d.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\Coordinate.ts" />
+    <TypeScriptCompile Include="ClientApp\src\index.d.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

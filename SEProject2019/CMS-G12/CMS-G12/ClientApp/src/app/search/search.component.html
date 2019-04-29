@@ -1,40 +1,40 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm-1"></div>
+    <div class="col-sm-10">
       <form>
-        <div class="form-group">
-          <label for="startingSearch"></label>
-          <input name="startingSearch" type="text" [(ngModel)]="startingSearch" class="form-control col-sm-9" id="startingSearch" placeholder="Start Point">
-        </div>
-        <div class="form-group">
-          <label for="destinationSearch"></label>
-          <input name="destinationSearch" type="text" [(ngModel)]="destinationSearch" class="form-control col-sm-9" id="destinationSearch" placeholder="Destination">
-        </div>
-        <button (click)="createRouteFromSearch(startingSearch, destinationSearch)" type="submit" class="btn btn-dark">Route</button>
-      </form>
-    </div>
-    <div class="col-sm">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field>
+                <input type="text" id="startingSearch" matInput [formControl]="control" [matAutocomplete]="auto" class="autoInput" placeholder="Starting Point">
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field>
+                <input type="text" id="destinationSearch" matInput [formControl]="control2" [matAutocomplete]="auto" class="autoInput" placeholder="Destination">
+              </mat-form-field>
+            </td>
+            <td><button (click)="createRoute()" type="submit" class="btn btn-dark" id="button">Route</button></td>
+          </tr>
+        </table>
+        
 
-    </div>
-    <div class="col-sm">
-      <form>
-        <select class="col-sm-6" id="startingDropdown" name="startingDropdown">
-          <option *ngFor="let item of buildings" [ngValue]="item">{{item.name}}</option>
-        </select>
-        <br />
-        <select class="col-sm-6" id="destinationDropdown" name="destinationDropdown">
-          <option *ngFor="let item2 of buildings" [ngValue]="item">{{item2.name}}</option>
-        </select> <br />
-        <button (click)="createRouteFromDropdown(startingDropdown, destinationDropdown)" type="submit" class="btn btn-dark">Route</button>
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let item of filteredItems" [value]="item.name">
+            {{item.name}}
+          </mat-option>
+        </mat-autocomplete>
       </form>
-    </div>
+     </div>
+    <div class="col-sm-1"></div>
   </div>
 </div>
 
 <div>
   <agm-map [(latitude)]="latCenter" [(longitude)]="lngCenter" [(zoom)]="zoom" [disableDefaultUI]="true" [zoomControl]="true" id="map">
     <agm-marker *ngFor="let data of buildings; let i = index" [(latitude)]="data.lat" [(longitude)]="data.lng" [agmFitBounds]="true"></agm-marker>
-    <agm-direction [origin]="point1" [destination]="point2" [travelMode]="travelMode"></agm-direction>
+    <agm-direction [origin]="point1" [destination]="point2" [travelMode]="travelMode" [waypoints]="stairs" [provideRouteAlternatives]="provideRouteAlternatives"></agm-direction>
   </agm-map>
 </div>
 

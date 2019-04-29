@@ -1,15 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { MatAutocompleteModule, MatInputModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TextInputAutocompleteModule } from 'angular-text-input-autocomplete';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
 import { SearchComponent } from './search/search.component';
-
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
 
@@ -18,20 +21,24 @@ import { AgmDirectionModule } from 'agm-direction';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    CounterComponent,
     SearchComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    BrowserAnimationsModule,
+    TextInputAutocompleteModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDXDjRjypWNXy-bbWSuk-DyGn4kg8Fzb2I'
     }),
     RouterModule.forRoot([
       { path: '', component: SearchComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
     ]),
+    NgbModule,
     AgmDirectionModule,
   ],
   providers: [GoogleMapsAPIWrapper],
